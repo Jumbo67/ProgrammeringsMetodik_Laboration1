@@ -12,7 +12,7 @@ class int_buffer {
 
 public :
     explicit int_buffer ( size_t size ) ; // size_t is defined in cstdlib
-    int_buffer ( const int * source , size_t size ) ;
+    int_buffer ( const int * source, size_t size);
     int_buffer ( const int_buffer & rhs ) ; // copy construct
     int_buffer ( int_buffer && rhs ) ; // move construct
     int_buffer & operator =( const int_buffer &rhs ) ; // copy assign
@@ -26,6 +26,9 @@ public :
     const int * begin () const ;
     const int * end () const ;
     ~ int_buffer () ;
+
+private:
+    int* buffer;
 
 };
 
