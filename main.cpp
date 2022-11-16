@@ -4,10 +4,8 @@
 #include <iostream>
 #include "int_buffer.h"
 
-
-
 int main() {
-
-
+    int_buffer a(10);
     return 1;
 }
+

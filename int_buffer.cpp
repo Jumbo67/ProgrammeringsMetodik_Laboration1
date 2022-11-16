@@ -5,12 +5,12 @@
 #include "int_buffer.h"
 
 
-int_buffer::int_buffer(size_t size) {
-    buffer = new int[size];
+int_buffer::int_buffer(size_t size) : first(new int[size]), last(first + size) {
 }
-int_buffer::int_buffer(const int *source, size_t size) {
+int_buffer::int_buffer(const int *source, size_t size) : int_buffer(size) {
 }
 
 int_buffer::~int_buffer() {
-    delete buffer;
+    std::cout << "delete";
+    delete [] first;
 }

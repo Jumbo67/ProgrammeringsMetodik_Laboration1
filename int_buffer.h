@@ -6,6 +6,7 @@
 #define C___INT_BUFFER_H
 
 #include <cstdlib>
+#include <iostream>
 
 
 class int_buffer {
@@ -28,7 +29,8 @@ public :
     ~ int_buffer () ;
 
 private:
-    int* buffer;
+    int* first;
+    int* last;
 
 };
 

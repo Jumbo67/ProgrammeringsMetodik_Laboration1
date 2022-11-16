@@ -4,4 +4,4 @@ project(C__)
 set(CMAKE_CXX_STANDARD 14)
 
 add_executable(C__
-        main.cpp)
+        main.cpp int_buffer.cpp int_buffer.h)
