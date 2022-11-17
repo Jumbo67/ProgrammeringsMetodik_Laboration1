@@ -12,6 +12,10 @@
 class int_buffer {
 
 public :
+    /**
+     * Constructs buffer of size given by
+     * @param size - Size of buffer
+     */
     explicit int_buffer ( size_t size ) ; // size_t is defined in cstdlib
     int_buffer ( const int * source, size_t size);
     int_buffer ( const int_buffer & rhs ) ; // copy construct
@@ -31,6 +35,8 @@ public :
 private:
     int* first;
     int* last;
+
+    void swap(int_buffer& target);
 
 };
 

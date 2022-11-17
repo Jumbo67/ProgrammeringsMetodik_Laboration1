@@ -5,7 +5,14 @@
 #include "int_buffer.h"
 
 int main() {
-    int_buffer a(10);
+    int_buffer test(10);
+
+    int_buffer test2 = test;
+
+
+    test2 = std::move(test);
+
+
     return 1;
 }
 
