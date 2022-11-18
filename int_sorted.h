@@ -14,8 +14,7 @@ public :
     void insert ( int value ) ;
     const int * begin () const ;
     const int * end () const ;
-    int_sorted merge ( const int_sorted &
-    merge_with ) const ;
+    int_sorted merge ( const int_sorted &merge_with ) const ;
 };
 
 

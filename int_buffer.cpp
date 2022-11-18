@@ -8,10 +8,10 @@
 int_buffer::int_buffer(size_t size) : first(new int[size]), last(first + size) {
 }
 int_buffer::int_buffer(const int *source, size_t size) : int_buffer(size) {
-    *first = *source;
+std::copy(source, source+size, this->first);
 }
 // Copy Ctor
-int_buffer::int_buffer ( const int_buffer & rhs ) : int_buffer(rhs.first, rhs.last) {
+int_buffer::int_buffer ( const int_buffer & rhs ) : int_buffer(rhs.first, rhs.size()) {
     std::cout << "Copy ctor" << "\n";
 }
 
@@ -32,11 +32,6 @@ int & int_buffer::operator []( size_t index )  {
 }
 const int & int_buffer::operator []( size_t index ) const {
     return *(first + index);
-}
-
-int_buffer::int_buffer (int* first, int* last) : int_buffer(std::distance(first, last)) {
-    auto target = this->first;
-    std::copy(first, last, target);
 }
 
 int_buffer::~int_buffer() {
