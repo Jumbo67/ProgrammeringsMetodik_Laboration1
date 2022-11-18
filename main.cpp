@@ -4,15 +4,28 @@
 #include <iostream>
 #include "int_buffer.h"
 
+void f(int_buffer buffer);
+
 int main() {
-    int_buffer test(10);
 
-    int_buffer test2 = test;
-
-
-    test2 = std::move(test);
-
+    f(int_buffer(10));
 
     return 1;
 }
 
+void f(int_buffer buf) {
+    int value = 1;
+    for (int* i = buf.begin(); i != buf.end(); i++) {
+        *i = value;
+        value++;
+    }
+
+    for (const int* i = buf.begin(); i != buf.end(); i++) {
+        std::cout << *i << "\n";
+    }
+
+    for(auto e : buf) {
+
+    }
+
+}

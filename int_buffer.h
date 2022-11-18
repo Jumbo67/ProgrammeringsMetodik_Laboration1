@@ -12,6 +12,7 @@
 class int_buffer {
 
 public :
+    int_buffer() = delete;
     /**
      * Constructs buffer of size given by
      * @param size - Size of buffer
@@ -20,6 +21,7 @@ public :
     int_buffer ( const int * source, size_t size);
     int_buffer ( const int_buffer & rhs ) ; // copy construct
     int_buffer ( int_buffer && rhs ) ; // move construct
+    int_buffer (int* first, int* last);
     int_buffer & operator =( const int_buffer &rhs ) ; // copy assign
     int_buffer & operator =( int_buffer && rhs ) ; // move assign
 
@@ -35,7 +37,6 @@ public :
 private:
     int* first;
     int* last;
-
     void swap(int_buffer& target);
 
 };
