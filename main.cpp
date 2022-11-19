@@ -16,16 +16,10 @@ int main() {
 void f(int_buffer buf) {
     int value = 1;
     for (int* i = buf.begin(); i != buf.end(); i++) {
-        *i = value;
-        value++;
+        *i = value++;
     }
 
     for (const int* i = buf.begin(); i != buf.end(); i++) {
         std::cout << *i << "\n";
     }
-
-    for(auto e : buf) {
-
-    }
-
 }
