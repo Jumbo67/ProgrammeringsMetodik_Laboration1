@@ -3,6 +3,7 @@
 //
 #include <iostream>
 #include "int_buffer.h"
+#include "int_sorted.h"
 
 void f(int_buffer buffer);
 

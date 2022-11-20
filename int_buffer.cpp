@@ -23,6 +23,7 @@ int_buffer::int_buffer ( int_buffer && rhs ): first(nullptr), last(nullptr) {
 int_buffer & int_buffer::operator =( const int_buffer &rhs ) {
     int_buffer copy(rhs);
     swap(copy);
+    return *this;
 }
 
 // Move assignment

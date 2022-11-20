@@ -18,6 +18,7 @@ public :
     int_sorted merge ( const int_sorted &merge_with ) const ;
 
 private:
+    int* entryPoint;
     int_buffer buffer;
 };
 
