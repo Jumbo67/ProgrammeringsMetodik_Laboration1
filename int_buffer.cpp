@@ -5,7 +5,7 @@
 #include "int_buffer.h"
 
 
-int_buffer::int_buffer(size_t size) : first(new int[size]), last(first + size) {
+int_buffer::int_buffer(size_t size) : first(new int[size]()), last(first + size) {
 }
 int_buffer::int_buffer(const int *source, size_t size) : int_buffer(size) {
 std::copy(source, (source+size), this->first);

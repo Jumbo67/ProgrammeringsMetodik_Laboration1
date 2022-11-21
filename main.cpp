@@ -8,19 +8,20 @@
 void f(int_buffer buffer);
 int_sorted sort ( const int * begin , const int * end );
 
+
 int main() {
 
-    int_buffer testBuf = int_buffer(10);
+    int_buffer testBuf = int_buffer(5);
+    int_sorted testSorted = int_sorted(testBuf.begin(), 5);
 
 
-    int_sorted testSorted = int_sorted(testBuf.begin(), 10);
+   std::cout << testSorted.isSorted() << "\n";
 
     for (auto data: testSorted) {
 
         std::cout << data << "\n";
 
     }
-
     return 1;
 }
 

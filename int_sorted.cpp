@@ -10,12 +10,28 @@ size_t int_sorted::size () const {
     return buffer.size();
 }
 void int_sorted::insert ( int value ) {
-    int_sorted temp = int_sorted(&value, 1);
-    this->buffer = this->merge(temp).buffer;
+    int_sorted temp(&value, 1);
+    *this = this->merge(temp);
 }
 bool int_sorted::isSorted() {
- const int* pointer = this->begin();
+    size_t size = this->size();
+    const int* index = begin();
+    if (size == 0) return true;
 
+    int prev_val = *this->begin();
+
+    while (size) {
+        if (*index < prev_val)
+            return false;
+        prev_val = *index;
+
+        ++index;
+        --size;
+    }
+
+    return true;
+
+return true;
 }
 const int * int_sorted::begin () const {
     return buffer.begin();
@@ -23,6 +39,24 @@ const int * int_sorted::begin () const {
 const int * int_sorted::end () const {
     return buffer.end();
 }
+
+void int_sorted::selection_sort() {
+
+    size_t sizeOfBuffer = this->size();
+    int index;
+    for (int i = 0; i <= sizeOfBuffer; ++i) {
+        index = i;
+        for (int j = i + 1; j <= sizeOfBuffer; ++j) {
+            if (buffer[j] < buffer[index]) {
+                index = j;
+            }
+        }
+        int temp = buffer[i];
+        buffer[i] = buffer[index];
+        buffer[index] = temp;
+    }
+}
+
 int_sorted int_sorted::merge ( const int_sorted &merge_with ) const {
 
     int_buffer tmpbuf = int_buffer(this->size() + merge_with.size());
