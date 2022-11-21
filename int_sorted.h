@@ -13,13 +13,14 @@ public :
     int_sorted ( const int * source , size_t size ) ;
     size_t size () const ;
     void insert ( int value ) ;
+    bool isSorted();
     const int * begin () const ;
     const int * end () const ;
     int_sorted merge ( const int_sorted &merge_with ) const ;
 
 private:
-    int* entryPoint;
     int_buffer buffer;
+
 };
 
 

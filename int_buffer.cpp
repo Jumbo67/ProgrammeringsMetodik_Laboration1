@@ -48,6 +48,7 @@ int_buffer::~int_buffer() {
 size_t int_buffer::size () const {
     return std::distance(first, last);
 }
+
 void int_buffer::swap(int_buffer& target) {
   std::swap(first, target.first);
   std::swap(last, target.last);
@@ -64,4 +65,3 @@ const int * int_buffer::begin () const {
 const int * int_buffer::end () const {
     return last;
 }
-
