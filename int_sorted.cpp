@@ -3,17 +3,22 @@
 //
 
 #include "int_sorted.h"
-
+// Merge sort
 int_sorted sort (const int* begin , const int* end) {
     if ( begin == end ) return int_sorted(nullptr,0) ;
-    if ( begin == end -1 ) return int_sorted (begin,1);
+    if ( begin == end - 1 ) return int_sorted (begin,1);
 
     ptrdiff_t half = (end - begin)/2; // pointer diff type
     const int * mid = begin + half;
     return sort(begin,mid).merge( sort(mid,end));
 }
-
-int_sorted::int_sorted ( const int * source , size_t size ) : buffer(sort(source, source+size).buffer){
+int_sorted::int_sorted ( const int * source , size_t size ) : buffer(nullptr, 0){
+    if (size == 1) {
+        buffer = int_buffer(source, 1);
+    }
+    else if (size > 1){
+        buffer = sort(source, source + size).buffer;
+    }
 }
 size_t int_sorted::size () const {
     return buffer.size();

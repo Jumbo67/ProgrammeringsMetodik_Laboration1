@@ -8,20 +8,23 @@
 #include "random"
 
 void f(int_buffer buffer);
-int_sorted sort ( const int * begin , const int * end );
 void selection_sort(int_buffer& sortValues);
 void loadValues(int_buffer& buffer);
 
 int main() {
 
-    int_buffer test(40000);
+    int_buffer test(2);
     loadValues(test);
-
 
     int_sorted sorted = int_sorted(test.begin(), test.size());
 
+    for (auto test : sorted) {
+        std::cout << test << "\n";
+    }
+
     return 1;
 }
+
 
 void f(int_buffer buf) {
     int value = 1;

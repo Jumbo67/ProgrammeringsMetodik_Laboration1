@@ -15,7 +15,7 @@ int_buffer::int_buffer ( const int_buffer & rhs ) : int_buffer(rhs.first, rhs.si
     std::cout << "Copy ctor" << "\n";
 }
 
-int_buffer::int_buffer ( int_buffer && rhs ): first(nullptr), last(nullptr) {
+int_buffer::int_buffer ( int_buffer && rhs ) {
     std::cout << "Move ctor" << "\n";
     swap(rhs);
 }
@@ -49,8 +49,8 @@ size_t int_buffer::size () const {
 }
 
 void int_buffer::swap(int_buffer& target) {
-  std::swap(first, target.first);
-  std::swap(last, target.last);
+  std::swap(this->first, target.first);
+  std::swap(this->last, target.last);
 }
 int * int_buffer::begin (){
     return first;
