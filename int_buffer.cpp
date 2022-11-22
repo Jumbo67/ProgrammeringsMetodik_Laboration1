@@ -41,7 +41,6 @@ const int & int_buffer::operator []( size_t index ) const {
 }
 
 int_buffer::~int_buffer() {
-    std::cout << "delete" << "\n";
     delete [] first;
 }
 

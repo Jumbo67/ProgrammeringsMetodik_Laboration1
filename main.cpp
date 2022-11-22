@@ -4,24 +4,22 @@
 #include <iostream>
 #include "int_buffer.h"
 #include "int_sorted.h"
+#include "algorithm"
+#include "random"
 
 void f(int_buffer buffer);
 int_sorted sort ( const int * begin , const int * end );
-
+void selection_sort(int_buffer& sortValues);
+void loadValues(int_buffer& buffer);
 
 int main() {
 
-    int_buffer testBuf = int_buffer(5);
-    int_sorted testSorted = int_sorted(testBuf.begin(), 5);
+    int_buffer test(40000);
+    loadValues(test);
 
 
-   std::cout << testSorted.isSorted() << "\n";
+    int_sorted sorted = int_sorted(test.begin(), test.size());
 
-    for (auto data: testSorted) {
-
-        std::cout << data << "\n";
-
-    }
     return 1;
 }
 
@@ -30,17 +28,42 @@ void f(int_buffer buf) {
     for (int* i = buf.begin(); i != buf.end(); i++) {
         *i = value++;
     }
-
     for (const int* i = buf.begin(); i != buf.end(); i++) {
         std::cout << *i << "\n";
     }
 }
-int_sorted sort ( const int * begin , const int * end ) {
-    if ( begin == end ) return int_sorted(nullptr,0) ;
-    if ( begin == end -1 ) return int_sorted (begin,1);
 
-    ptrdiff_t half = (end - begin)/2; // pointer diff type
-    const int * mid = begin + half;
-    return sort(begin,mid).merge( sort(mid,end));
+void selection_sort(int_buffer& sortValues) {
+    for (int* begin = sortValues.begin(); begin != sortValues.end(); begin++)
+    {
+        int* min = std::min_element(begin, sortValues.end());
+        std::iter_swap(min, begin);
+    }
 }
 
+void loadValues(int_buffer& buffer) {
+    srand(time(NULL));
+
+    for (int* i = buffer.begin(); i < buffer.end(); ++i) {
+        *i = rand();
+    }
+}
+
+/**
+*
+ *
+ *   size_t sizeOfBuffer = valuesToSort.size();
+    int index;
+    for (int i = 0; i <= sizeOfBuffer; ++i) {
+        index = i;
+        for (int j = i + 1; j <= sizeOfBuffer; ++j) {
+            if (valuesToSort[j] < valuesToSort[index]) {
+                index = j;
+            }
+        }
+        int temp = valuesToSort[i];
+        valuesToSort[i] = valuesToSort[index];
+        valuesToSort[index] = temp;
+    }
+
+*/

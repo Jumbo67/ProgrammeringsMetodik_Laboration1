@@ -16,7 +16,6 @@ public :
     bool isSorted();
     const int * begin () const ;
     const int * end () const ;
-    void selection_sort();
     int_sorted merge ( const int_sorted &merge_with ) const ;
 
 private:

@@ -4,7 +4,16 @@
 
 #include "int_sorted.h"
 
-int_sorted::int_sorted ( const int * source , size_t size ) : buffer(source, size) {
+int_sorted sort (const int* begin , const int* end) {
+    if ( begin == end ) return int_sorted(nullptr,0) ;
+    if ( begin == end -1 ) return int_sorted (begin,1);
+
+    ptrdiff_t half = (end - begin)/2; // pointer diff type
+    const int * mid = begin + half;
+    return sort(begin,mid).merge( sort(mid,end));
+}
+
+int_sorted::int_sorted ( const int * source , size_t size ) : buffer(sort(source, source+size).buffer){
 }
 size_t int_sorted::size () const {
     return buffer.size();
@@ -38,23 +47,6 @@ const int * int_sorted::begin () const {
 }
 const int * int_sorted::end () const {
     return buffer.end();
-}
-
-void int_sorted::selection_sort() {
-
-    size_t sizeOfBuffer = this->size();
-    int index;
-    for (int i = 0; i <= sizeOfBuffer; ++i) {
-        index = i;
-        for (int j = i + 1; j <= sizeOfBuffer; ++j) {
-            if (buffer[j] < buffer[index]) {
-                index = j;
-            }
-        }
-        int temp = buffer[i];
-        buffer[i] = buffer[index];
-        buffer[index] = temp;
-    }
 }
 
 int_sorted int_sorted::merge ( const int_sorted &merge_with ) const {
@@ -93,3 +85,4 @@ int_sorted int_sorted::merge ( const int_sorted &merge_with ) const {
     return sortedBuffer;
 
 }
+
