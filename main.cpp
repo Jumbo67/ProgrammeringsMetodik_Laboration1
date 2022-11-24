@@ -5,22 +5,46 @@
 #include "int_buffer.h"
 #include "int_sorted.h"
 #include "algorithm"
-#include "random"
+#include "chrono"
 
 void f(int_buffer buffer);
-void selection_sort(int_buffer& sortValues);
+void selectionSort(int_buffer& buffer);
 void loadValues(int_buffer& buffer);
 
 int main() {
 
-    int_buffer test(2);
-    loadValues(test);
+    srand(time(NULL));
+    size_t bufferSize = 40000;
+    int_buffer buffer(bufferSize);
+    loadValues(buffer);
 
-    int_sorted sorted = int_sorted(test.begin(), test.size());
+    std::chrono::duration<double> timeDuration;
 
-    for (auto test : sorted) {
-        std::cout << test << "\n";
-    }
+    // first
+   auto start = std::chrono::high_resolution_clock::now();
+
+   auto end = std::chrono::high_resolution_clock::now();
+
+    loadValues(buffer);
+    // second
+   start = std::chrono::high_resolution_clock::now();
+   std::sort(buffer.begin(), buffer.end());
+   end = std::chrono::high_resolution_clock::now();
+
+   timeDuration = end - start;
+
+   std::cout << "std::sort Time: " << timeDuration.count() << "\n";
+
+    loadValues(buffer);
+    // third
+   start = std::chrono::high_resolution_clock::now();
+    selectionSort(buffer);
+
+   end = std::chrono::high_resolution_clock::now();
+
+    timeDuration = end - start;
+
+    std::cout << "selection_sort Time: " << timeDuration.count() << "\n";
 
     return 1;
 }
@@ -36,26 +60,34 @@ void f(int_buffer buf) {
     }
 }
 
-void selection_sort(int_buffer& sortValues) {
-    for (int* begin = sortValues.begin(); begin != sortValues.end(); begin++)
-    {
-        int* min = std::min_element(begin, sortValues.end());
-        std::iter_swap(min, begin);
+void selectionSort(int_buffer& buffer) {
+    int min_index;
+    size_t size = buffer.size();
+
+    for (int i = 0; i < size - 1; ++i) {
+        min_index = i;
+        for (int j = i+1; j < size; ++j) {
+            if (buffer[min_index] > buffer[j]) {
+                min_index = j;
+            }
+        }
+        int tmp = buffer[min_index];
+        buffer[min_index] = buffer[i];
+        buffer[i] = tmp;
     }
 }
 
 void loadValues(int_buffer& buffer) {
     srand(time(NULL));
-
     for (int* i = buffer.begin(); i < buffer.end(); ++i) {
-        *i = rand();
+        *i = rand() % 10000;
     }
 }
 
 /**
 *
- *
- *   size_t sizeOfBuffer = valuesToSort.size();
+*
+*   size_t sizeOfBuffer = valuesToSort.size();
     int index;
     for (int i = 0; i <= sizeOfBuffer; ++i) {
         index = i;

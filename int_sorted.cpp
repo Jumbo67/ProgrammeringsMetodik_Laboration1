@@ -4,22 +4,24 @@
 
 #include "int_sorted.h"
 // Merge sort
-int_sorted sort (const int* begin , const int* end) {
-    if ( begin == end ) return int_sorted(nullptr,0) ;
-    if ( begin == end - 1 ) return int_sorted (begin,1);
+int_sorted sort ( const int * begin , const int * end ) {
+    if ( begin == end ) {
+        return int_sorted(nullptr, 0);
+    }
+    if ( begin == end - 1 ) {
+        return int_sorted(begin, 1);
+    }
 
-    ptrdiff_t half = (end - begin)/2; // pointer diff type
-    const int * mid = begin + half;
-    return sort(begin,mid).merge( sort(mid,end));
+    ptrdiff_t half = ( end - begin ) /2; //pointer diff type
+    const int * mid = begin + half ;
+    return sort(begin,mid).merge(sort (mid, end));
 }
+
+
 int_sorted::int_sorted ( const int * source , size_t size ) : buffer(nullptr, 0){
-    if (size == 1) {
-        buffer = int_buffer(source, 1);
-    }
-    else if (size > 1){
         buffer = sort(source, source + size).buffer;
-    }
 }
+
 size_t int_sorted::size () const {
     return buffer.size();
 }
@@ -29,8 +31,11 @@ void int_sorted::insert ( int value ) {
 }
 bool int_sorted::isSorted() {
     size_t size = this->size();
-    const int* index = begin();
     if (size == 0) return true;
+
+    const int* index = begin()+1;
+
+    size--;
 
     int prev_val = *this->begin();
 
@@ -44,8 +49,6 @@ bool int_sorted::isSorted() {
     }
 
     return true;
-
-return true;
 }
 const int * int_sorted::begin () const {
     return buffer.begin();

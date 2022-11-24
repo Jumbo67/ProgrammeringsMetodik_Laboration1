@@ -8,7 +8,7 @@
 int_buffer::int_buffer(size_t size) : first(new int[size]()), last(first + size) {
 }
 int_buffer::int_buffer(const int *source, size_t size) : int_buffer(size) {
-std::copy(source, (source+size), this->first);
+std::copy(source, source+size, this->first);
 }
 // Copy Ctor
 int_buffer::int_buffer ( const int_buffer & rhs ) : int_buffer(rhs.first, rhs.size()) {
@@ -25,7 +25,6 @@ int_buffer & int_buffer::operator =( const int_buffer &rhs ) {
     swap(copy);
     return *this;
 }
-
 // Move assignment
 int_buffer &int_buffer::operator =( int_buffer && rhs ) {
     std::cout << "Move assign" << "\n";
