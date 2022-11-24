@@ -13,6 +13,7 @@ void loadValues(int_buffer& buffer);
 
 int main() {
 
+
     srand(time(NULL));
     size_t bufferSize = 40000;
     int_buffer buffer(bufferSize);
@@ -22,10 +23,13 @@ int main() {
 
     // first
    auto start = std::chrono::high_resolution_clock::now();
-
+   int_sorted sorted = int_sorted(buffer.begin(), bufferSize);
    auto end = std::chrono::high_resolution_clock::now();
 
+    timeDuration = end - start;
+    std::cout << "Merge sort time: " << timeDuration.count() << "\n";
     loadValues(buffer);
+
     // second
    start = std::chrono::high_resolution_clock::now();
    std::sort(buffer.begin(), buffer.end());
@@ -33,7 +37,7 @@ int main() {
 
    timeDuration = end - start;
 
-   std::cout << "std::sort Time: " << timeDuration.count() << "\n";
+   std::cout << "std::sort time: " << timeDuration.count() << "\n";
 
     loadValues(buffer);
     // third
@@ -44,7 +48,7 @@ int main() {
 
     timeDuration = end - start;
 
-    std::cout << "selection_sort Time: " << timeDuration.count() << "\n";
+    std::cout << "selection sort time: " << timeDuration.count() << "\n";
 
     return 1;
 }
