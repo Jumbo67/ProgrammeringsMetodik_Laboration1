@@ -18,7 +18,10 @@ int_sorted sort ( const int * begin , const int * end ) {
 }
 
 
-int_sorted::int_sorted ( const int * source , size_t size ) : buffer(nullptr, 0){
+int_sorted::int_sorted ( const int * source , size_t size ) : buffer(nullptr, 0) {
+    if ( size == 1) {
+        buffer = int_buffer(source, size);
+    } else if (size > 1)
         buffer = sort(source, source + size).buffer;
 }
 
@@ -35,7 +38,7 @@ bool int_sorted::isSorted() {
 
     const int* index = begin()+1;
 
-    size--;
+    --size;
 
     int prev_val = *this->begin();
 
@@ -59,7 +62,7 @@ const int * int_sorted::end () const {
 
 int_sorted int_sorted::merge ( const int_sorted &merge_with ) const {
 
-    int_buffer tmpbuf = int_buffer(this->size() + merge_with.size());
+    int_buffer buffer = int_buffer(this->size() + merge_with.size());
 
     const int* a = this->begin();
     const int* b = merge_with.begin();
@@ -67,28 +70,27 @@ int_sorted int_sorted::merge ( const int_sorted &merge_with ) const {
     size_t insertPoint = 0;
 
     while (a != this->end() && b != merge_with.end()) {
-
         if (*a < *b) {
-            tmpbuf[insertPoint++] = *a;
+            buffer[insertPoint++] = *a;
             ++a;
         } else {
-            tmpbuf[insertPoint++] = *b;
+            buffer[insertPoint++] = *b;
             ++b;
         }
-
     }
-
     while (a != this->end()) {
-        tmpbuf[insertPoint++] = *a;
+        buffer[insertPoint++] = *a;
         ++a;
     }
 
     while (b != merge_with.end()) {
-        tmpbuf[insertPoint++] = *b;
+        buffer[insertPoint++] = *b;
         ++b;
     }
 
-    int_sorted sortedBuffer = int_sorted(tmpbuf.begin(), tmpbuf.size());
+    int_sorted sortedBuffer(nullptr, 0);
+
+    sortedBuffer.buffer = buffer;
 
     return sortedBuffer;
 

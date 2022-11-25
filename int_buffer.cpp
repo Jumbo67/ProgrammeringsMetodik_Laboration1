@@ -12,11 +12,9 @@ std::copy(source, source+size, this->first);
 }
 // Copy Ctor
 int_buffer::int_buffer ( const int_buffer & rhs ) : int_buffer(rhs.first, rhs.size()) {
-    std::cout << "Copy ctor" << "\n";
 }
 
-int_buffer::int_buffer ( int_buffer && rhs ) {
-    std::cout << "Move ctor" << "\n";
+int_buffer::int_buffer ( int_buffer && rhs ) : first(nullptr), last(nullptr){
     swap(rhs);
 }
 
@@ -27,7 +25,6 @@ int_buffer & int_buffer::operator =( const int_buffer &rhs ) {
 }
 // Move assignment
 int_buffer &int_buffer::operator =( int_buffer && rhs ) {
-    std::cout << "Move assign" << "\n";
     swap(rhs);
     return *this;
 }

@@ -10,9 +10,9 @@
 void f(int_buffer buffer);
 void selectionSort(int_buffer& buffer);
 void loadValues(int_buffer& buffer);
+void print(int_sorted& values);
 
 int main() {
-
 
     srand(time(NULL));
     size_t bufferSize = 40000;
@@ -26,9 +26,12 @@ int main() {
    int_sorted sorted = int_sorted(buffer.begin(), bufferSize);
    auto end = std::chrono::high_resolution_clock::now();
 
-    timeDuration = end - start;
-    std::cout << "Merge sort time: " << timeDuration.count() << "\n";
-    loadValues(buffer);
+   std::cout << "Sorted: " << sorted.isSorted() << "\n";
+   //print(sorted);
+
+   timeDuration = end - start;
+   std::cout << "Merge sort time: " << timeDuration.count() << "\n";
+   loadValues(buffer);
 
     // second
    start = std::chrono::high_resolution_clock::now();
@@ -82,9 +85,14 @@ void selectionSort(int_buffer& buffer) {
 }
 
 void loadValues(int_buffer& buffer) {
-    srand(time(NULL));
-    for (int* i = buffer.begin(); i < buffer.end(); ++i) {
+    for (int* i = buffer.begin(); i != buffer.end(); ++i) {
         *i = rand() % 10000;
+    }
+}
+
+void print(int_sorted& values) {
+    for (auto value : values) {
+        std::cout << value << "\n";
     }
 }
 

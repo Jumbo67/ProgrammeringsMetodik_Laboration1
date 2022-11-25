@@ -9,7 +9,6 @@
 
 class int_sorted {
 public :
-    int_sorted() = delete;
     int_sorted ( const int * source , size_t size ) ;
     size_t size () const ;
     void insert ( int value ) ;
@@ -22,6 +21,8 @@ private:
     int_buffer buffer;
 
 };
+
+int_sorted sort ( const int * begin , const int * end );
 
 
 #endif //C___INT_SORTED_H
